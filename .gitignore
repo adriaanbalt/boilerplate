@@ -1,7 +1,6 @@
 // Files
 .DS_Store
 npm-debug.log
-.sonar
 .project
 *.sublime-project
 *.sublime-workspace
@@ -11,7 +10,6 @@ npm-debug.log
 .svn
 .sass-cache
 /node_modules
-app/bower_components
 /dist
 .idea
 /app/assets/styles
