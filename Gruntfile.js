@@ -25,15 +25,6 @@ module.exports = function(grunt) {
 		// Clear files and folders that are auto generated
 		// https://github.com/gruntjs/grunt-contrib-clean
 		clean: {
-			dev: {
-				files: [{
-					dot: true,
-					src: [
-						'<%= directory.app %>/assets/styles/*',
-						'<%= directory.app %>/assets/js/*'
-					]
-				}]
-			},
 			dist: {
 				files: [{
 					dot: true,
@@ -73,7 +64,7 @@ module.exports = function(grunt) {
 		// Concatenates JS from multiple files
 		// https://github.com/gruntjs/grunt-contrib-concat
 		concat: {
-			dev: {
+			dist: {
 				src: ['<%= directory.app %>/vendor/**/*.js', '<%= directory.app %>/global/**/*.js', '<%= directory.app %>/pages/**/*.js', '<%= directory.app %>/assets/components/**/*.js'],
 				dest: '<%= directory.app %>/assets/js/<%= pkg.name %>.js',
 			},
@@ -111,15 +102,6 @@ module.exports = function(grunt) {
 				files: {
 					'<%= directory.dist %>/assets/styles/<%= pkg.name %>.min.css': ['<%= directory.app %>/assets/styles/**/*.css']
 				}
-			},
-			dist: {
-				files: [{
-					expand: true,
-					cwd: '<%= directory.dist %>/assets/styles/',
-					src: ['<%= directory.app %>/assets/styles/**/*.css', '!<%= directory.app %>/assets/styles/**/*.min.css'],
-					dest: '<%= directory.dist %>/assets/styles/',
-					ext: '.min.css'
-				}]
 			}
 		},
 
@@ -156,12 +138,6 @@ module.exports = function(grunt) {
 				keepalive: true,
 				hostname: 'localhost'
 			},
-			dev: {
-				options: {
-					open: true,
-					base: 'app'
-				}
-			},
 			dist: {
 				options: {
 					open: true,
@@ -175,14 +151,15 @@ module.exports = function(grunt) {
 		// https://github.com/gruntjs/grunt-contrib-watch
 		watch: {
 			js: {
-				files: ['<%= directory.app %>/vendor/**/*.js', '<%= directory.app %>/global/**/*.js', '<%= directory.app %>/pages/**/*.js', '<%= directory.app %>/assets/components/**/*.js'],
-				tasks: ['concat:dev','uglify:dist'],
+				files: ['<%= directory.app %>/vendor/**/*.js', '<%= directory.app %>/global/**/*.js', '<%= directory.app %>/pages/**/*.js', '<%= directory.app %>/components/**/*.js'],
+				tasks: ['concat:dist','uglify:dist'],
 				options: {
 					livereload: true
 				}
 			},
 			html: {
 				files: ['<%= directory.app %>/*.html', '<%= directory.app %>/pages/**/*.html'],
+				tasks: ['newer:copy:dist'],
 				options: {
 					livereload: true
 				}
@@ -201,42 +178,23 @@ module.exports = function(grunt) {
 		// https://github.com/sindresorhus/grunt-concurrent
 		concurrent: {
 			dev: ['watch','connect:dev'],
-			dist: ['watch','connect:dist']
-			// ,
-			// options: {
-			// 	logConcurrentOutput: true
-			// }
+			dist: ['watch','connect:dist'],
+			options: {
+				logConcurrentOutput: true
+			}
 		}
 
 	});
 
 	require('load-grunt-tasks')(grunt);
-	
+
 	// Development grunt task
 	grunt.registerTask('dev', [
 		// Cleanup Previously Generated Files
 		'clean:dist',
 
 		// Concat
-		'concat:dev',
-
-		// Sass compilation and sprite generation
-		'compass',
-
-		// Ensure no CSS errors
-		'csslint',
-
-		// Runs both WATCH and CONNECT
-		'concurrent:dev'
-	]);
-
-	// Development grunt task
-	grunt.registerTask('prod', [
-		// Cleanup Previously Generated Files
-		'clean:dist',
-
-		// Concat
-		'concat:dev',
+		'concat:dist',
 
 		// Minify JS
 		'uglify:dist',
