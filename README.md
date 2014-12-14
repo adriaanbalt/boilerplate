@@ -54,7 +54,7 @@ npm install
 ### Grunt Task(s)
 
 #### Dev
-The dev command will launch an http server as well as build all html/css/js for the app and the styleguide. Files will also be 'watched' for changes and rebuilt if necessary. Code will be checked for errors and any unit tests will be run.
+Runs the DEV task
 
 ```
 grunt dev
