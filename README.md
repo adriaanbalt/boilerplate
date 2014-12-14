@@ -3,12 +3,11 @@
 
 ####Introduction
 
-This project uses:
+This project creates a blank slate to build an AngularJS web app from scratch.
+
+#### Node Modules
 
 * [Grunt](http://gruntjs.com/)
-
-#### Grunt Node Modules
-
 * [Grunt-CLI](https://github.com/gruntjs/grunt-cli)
 * [Compass](https://github.com/gruntjs/grunt-contrib-compass)
 * [Concurrent](https://github.com/sindresorhus/grunt-concurrent)
