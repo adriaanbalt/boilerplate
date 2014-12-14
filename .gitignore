@@ -1,0 +1,18 @@
+// Files
+app/*.html
+app/styleguide/*.html
+.DS_Store
+npm-debug.log
+.sonar
+.project
+*.sublime-project
+*.sublime-workspace
+
+// Folders
+.tmp
+.svn
+.sass-cache
+/node_modules
+app/bower_components
+/dist
+.idea
