@@ -1,10 +1,7 @@
 
-# Caroline Kallback website
-
-![Caroline Kallback Logo](carolinekallback.com/carolinekallback-headshot.jpg "CarolineKallback")
+# Boilerplate website
 
 ####Introduction
-
 
 #### Features
 
@@ -29,20 +26,6 @@ Make sure your have the following installed with these versions or greater when 
 #### Installation
 
 There are several hoops you may have to jump through to get all dependencies installed, but hopefully alot of this stuff will be on your machine anyway.
-
-##### Installing Ruby dependencies
-
-First we need to install bundler
-
-```
-gem install bundler
-```
-
-Then we need to get the rest of our ruby dependencies (Sass, Neat Bourbon)
-
-```
-bundle install
-```
 
 #### Installing Tooling dependencies (Grunt tasks, Bower)
 
